@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="max-age=0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=10,user-scalable=1">
+    <title>官方动态</title>
+    <style>
+        *{margin:0;padding: 0;}
+        a{text-decoration: none;padding:10px 13px;display:block;}
+        p{overflow: hidden;text-overflow:ellipsis;white-space:nowrap;padding:2px 0;}
+        .title{font-size: 16px;color:black;}
+        .date{font-size: 16px;color:gray;}
+        .skiptranslate{display:none}
+        body{display:none;}
+    </style>
+</head>
+<body>
+<section>
+</section>
+<script>
+    if(!cookie) var cookie={
+        put:function(key,value,t){
+            if(t==null) t=-1;
+            var oDate=new Date();
+            oDate.setDate(oDate.getDate()+t);
+            document.cookie=key+"="+value+"; expires="+oDate.toDateString();
+        },
+        get:function(key){
+            var arr1=document.cookie.split("; ");
+            for(var i=0;i<arr1.length;i++){
+                var arr2=arr1[i].split("=");
+                if(arr2[0]===key){
+                    return decodeURI(arr2[1]);
+                }
+            }
+            return null;
+        },
+        remove:function(key){
+            this.put(key,"",-1);
+        }
+    };
+</script>
+<script>
+    function onTranslated(){
+        document.body.style.top="0px";
+        document.body.style.display="block";
+    }
+    var language=navigator.language;
+    if(language!=="zh-CN"){
+        var transLan=language.indexOf("zh-")===0?"zh-TW":"en";
+        var transvalue=cookie.get("googtrans");
+        if(transvalue==null) cookie.put("googtrans","/auto/"+transLan);
+    }
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                includedLanguages: "en,zh-CN,zh-TW",
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: true,
+            },
+            "google_translate_element"
+        );
+    }
+    function googleTranslateStart(){
+        if(language!=="zh-CN"){
+            var script=document.createElement("script");
+            script.src="https://translate.google.cn/translate_a/element.js?cb=googleTranslateElementInit";
+            script.onload=function(){
+                setTimeout("onTranslated()",1000);
+            };
+            document.body.appendChild(script);
+        }
+		else onTranslated();
+    }
+</script>
+<script>
+    const sectionElement=document.querySelector("section");
+    function getDate(time){
+        const year=time.substring(0,4);
+        const month=time.substring(4,6);
+        const day=time.substring(6);
+        return year+"年"+month+"月"+day+"日";
+    }
+    function addElement(title,time){
+        const url="article/?title="+title+"&time="+time;
+        const aElement=document.createElement("a");
+        aElement.href=url;
+        sectionElement.appendChild(aElement);
+
+        const titleElement=document.createElement("p");
+        titleElement.className="title";
+        titleElement.textContent=title;
+        aElement.appendChild(titleElement);
+
+        const dateElement=document.createElement("p");
+        dateElement.className="date";
+        dateElement.textContent=getDate(time);
+        aElement.appendChild(dateElement);
+    }
+    function showList(){
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload=function() {
+            const xml=xmlhttp.responseXML;
+            const articleArray=xml.getElementsByTagName("article");
+            for(let i=0;i<articleArray.length;i++){
+                const article=articleArray[i];
+                const title=article.getElementsByTagName("title")[0].textContent;
+                const time=article.getElementsByTagName("time")[0].textContent;
+                addElement(title,time);
+            }
+            //加载之后再翻译
+            googleTranslateStart();
+        };
+        xmlhttp.open("GET","list.xml",true);
+        xmlhttp.send();
+    }
+    showList();
+</script>
+</body>
+</html>
