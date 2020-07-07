@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta content='max-age=0'/>
+	<meta name='viewport' content='width=device-width, initial-scale=1,maximum-scale=10,user-scalable=1'>
+    <style>
+        /*
+        .line{display:flex;justify-content: space-between;height:46px;line-height:46px;}
+        .line{display:flex;}
+        .item{flex:1;}
+        .item{display:table-cell;}
+        .line{display:table;table-layout: fixed;}
+         */
+		*{padding:0;margin:0;}
+        .line{display:block;text-decoration:none;position:relative;height:46px;line-height:46px;}
+        .hide{display:none;}
+        .key{padding:0 13px;color:#000000;font-size:16px;}
+        .value{padding:0 13px;right:0;color:#808080;font-size:16px;position:absolute;}
+        /*.icon{padding:0 16px;right:0;width:20px;height:20px;margin-top:-10px;top:50%;position:absolute;}*/
+		.icon{padding:13px 13px;right:0;width:20px;height:20px;position:absolute;}
+    </style>
+	<script src="http://uujian.cn/cdn/js/metax/util/string.js"></script>
+	<script>
+	function getString(key){
+		return metax.util.string.get(key);
+	}
+	function setKeyString(id){
+		document.getElementById(id).querySelector(".key").textContent=getString(id);
+	}
+	document.title=getString("title");
+	</script>
+</head>
+<body>
+
+<a class="line hide" id="clientVersion">
+    <span class="item key"></span>
+    <span class="item value" id="clientVersionName"></span>
+    <script>setKeyString("clientVersion");</script>
+</a>
+<a class="line hide" id="serverVersion">
+    <span class="item key"></span>
+    <span class="item value" id="serverVersionName"></span>
+    <script>setKeyString("serverVersion");</script>
+</a>
+<a class="line hide" id="update" href="http://uujian.cn/browser/apk/browser.apk">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("update");</script>
+</a>
+<a class="line hide" id="edition">
+    <span class="item key"></span>
+    <span class="item value" id="editionName">会员版</span>
+	<script>setKeyString("edition");</script>
+</a>
+<a class="line hide" id="expiration">
+    <span class="item key"></span>
+    <span class="item value" id="expirationDate"></span>
+	<script>setKeyString("expiration");</script>
+</a>
+<a class="line" id="info" href="http://uujian.cn/browser/info.html">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("info");</script>
+</a>
+<a class="line" id="history" href="http://uujian.cn/browser/history.html">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("history");</script>
+</a>
+<a class="line" id="help" href="http://uujian.cn/browser/help.html">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("help");</script>
+</a>
+<a class="line" id="agreement" href="http://uujian.cn/browser/agreement.html">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("agreement");</script>
+</a>
+<a class="line" id="privacy" href="http://uujian.cn/browser/privacy.html">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("privacy");</script>
+</a>
+<a class="line" id="feedback" href="http://uujian.cn/browser/feedback.html">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("feedback");</script>
+</a>
+<a class="line" id="blog" href="http://uujian.cn/blog">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/forward.png"/>
+	<script>setKeyString("blog");</script>
+</a>
+<a class="line hide" id="donate" href="http://uujian.cn/browser/donate.html">
+    <span class="item key"></span>
+    <img class="item icon meta-invert" src="http://uujian.cn/cdn/drawable-xxxhdpi/icon/forward.png"/>
+	<script>setKeyString("donate");</script>
+</a>
+<!--
+<a class="line" id="share" href="javascript:share();">
+    <span class="item key">分享好友</span>
+    <img class="item icon meta-invert" src="icon/forward.png"/>
+</a>
+-->
+
+<script>
+    //版本信息
+    var server={
+        versionName:"2.10",
+        versionCode:113
+    };
+    //显示元素
+    function show(id){
+        document.getElementById(id).style.display="block";
+    }
+    //分享好友
+    function share(){
+        meta.shareText("我正在使用荟萃浏览器，仅有不到2M大小，覆盖全方位上网需求，赶快来试试吧~~http://uujian.cn/meta/share.html");
+    }
+    //初始化
+    (function(){
+		//meta.setShowUrl("meta:about");
+        var info=JSON.parse(meta.getInfo());
+        var play=meta.queryApp("com.android.vending");
+        document.getElementById("clientVersionName").textContent=info.versionName;
+		var update=(server.versionCode>info.versionCode)&&!play;
+        document.getElementById("serverVersionName").textContent=update?server.versionName:info.versionName;
+        show("clientVersion");
+        show("serverVersion");
+        if(update) show("update");//显示更新
+        if(!play) show("share");//显示分享
+        if(info.exp>5&&!play) show("donate");//显示捐赠
+        //显示会员
+        var expirationTime=info.deadline;//有效期
+        var currentTime=new Date().getTime();//当前时间
+        if(expirationTime>currentTime){
+            show("edition");
+            show("expiration");
+            //小于12小时，提示等待
+            var waitHour=(expirationTime-currentTime)/(3600*1000);
+            var expirationDate;
+            if(waitHour<12) expirationDate="请"+Math.ceil(waitHour)+"小时后查询";
+            else{
+                var time = new Date(expirationTime);
+                var y = time.getFullYear();
+                var m = time.getMonth()+1;
+                var d = time.getDate();
+                expirationDate=y+"-"+m+"-"+d;
+            }
+            document.getElementById("expirationDate").textContent=expirationDate;
+        }
+    })();
+</script>
+</body>
+</html>
