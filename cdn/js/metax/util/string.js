@@ -1,4 +1,4 @@
-if(!metax) var metax={};
+﻿if(!metax) var metax={};
 if(!metax.util) metax.util={};
 if(!metax.util.string){
 	metax.util.string={
