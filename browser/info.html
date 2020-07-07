@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content='max-age=0'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1,maximum-scale=10,user-scalable=1'>
+    <title>设备信息</title>
+    <style>
+        *{padding:0;margin:0;}
+        .line{display:block;text-decoration:none;position:relative;height:46px;line-height:46px;}
+        . {display:none;}
+        .key{padding:0 16px;color:#000000;font-size:16px;}
+        .value{padding:0 16px;right:0;color:#808080;font-size:16px;position:absolute;}
+        .icon{padding:0 16px;right:0;width:20px;height:20px;margin-top:-10px;top:50%;position:absolute;}
+    </style>
+</head>
+<body>
+
+<a class="line hide">
+    <span class="item key">浏览器版本名称</span>
+    <span class="item value" id="browserVersionName"></span>
+</a>
+<a class="line hide">
+    <span class="item key">浏览器版本号</span>
+    <span class="item value" id="browserVersionCode"></span>
+</a>
+<a class="line hide">
+    <span class="item key">浏览器内核版本</span>
+    <span class="item value" id="browserCoreVersion"></span>
+</a>
+<a class="line hide">
+    <span class="item key">安卓版本名称</span>
+    <span class="item value" id="androidVersionName"></span>
+</a>
+<a class="line hide">
+    <span class="item key">安卓版本号</span>
+    <span class="item value" id="androidVersionCode"></span>
+</a>
+<a class="line hide">
+    <span class="item key">设备型号</span>
+    <span class="item value" id="deviceModel"></span>
+</a>
+<a class="line hide">
+    <span class="item key">用户名称</span>
+    <span class="item value" id="userName"></span>
+</a>
+<a class="line hide">
+    <span class="item key">IMEI码</span>
+    <span class="item value" id="imei"></span>
+</a>
+<script>
+    function show(id,text){
+        if(text==null||text==="") text="未知";
+        var element=document.getElementById(id);
+        element.textContent=text;
+        element.parentElement.style.display="block";
+    }
+
+    meta.setShowUrl("meta:info");
+
+    var info=JSON.parse(meta.getInfo());
+    show("browserVersionName",info.versionName);
+    show("browserVersionCode",info.versionCode);
+    show("androidVersionCode",info.sdkVersion);
+    show("imei",info.imei);
+    show("userName",info.userName);
+
+    var userAgent=navigator.userAgent;
+    var array=userAgent.split(";");
+    for(var i=0;i<array.length;i++){
+        var str=array[i];
+        if(str.indexOf("Build/")!==-1){
+            show("deviceModel",str.split("Build")[0].trim());
+        }
+        else if(str.indexOf("Chrome/")!==-1){
+            show("browserCoreVersion",str.split("Chrome/")[1].split("Mobile")[0].trim());
+        }
+        else if(str.indexOf("Android")!==-1){
+            show("androidVersionName",str.split("Android")[1].trim());
+        }
+    }
+</script>
+</body>
+</html>

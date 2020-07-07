@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1,maximum-scale=10,user-scalable=1'>
+    <title>问题反馈</title>
+    <style>
+        *{padding:0;margin:0;}
+        header{padding:10px 13px;text-align:center;position:relative;}
+        .favicon{border:0;width:20px;height:20px;margin-top:-10px;top: 50%;position:absolute;}
+        #title{margin-left:25px;color:#222222;}
+        div{padding:10px 13px;color:#222222;}
+    </style>
+</head>
+<body>
+<header>
+    <span><img class="favicon" src="favicon.ico"/></span>
+    <span id="title">问题反馈</span>
+</header>
+
+<div>如果使用过程中出现问题，优先建议您在QQ交流群私聊群主（用户名：若水韶光）。</div>
+<div>您也可以发送邮件到我们的联系邮箱。</div>
+<div>如果您是酷安用户，您还可以在酷安私聊或@开发者（用户名：若水韶光）。</div>
+<div>提示信息：</div>
+<div>1.正常情况下，每晚24点统一回复。</div>
+<div>2.QQ群内@群主无效，请务必私聊。</div>
+<div>联系方式：</div>
+<div>联系邮箱：418623336@qq.com</div>
+<!--<div>QQ交流群：649625979</div>-->
+<div>QQ交流群：<span id="group">726780644</span></div>
+<script>
+if(!meta){
+debug=true;
+var meta={};
+}
+if(!debug){
+var cookapk=meta.queryApp("com.coolapk.market");
+document.getElementById("group").textContent=cookapk?"726780644":"588206437";
+}
+</script>
+</body>
+</html>
