@@ -1,0 +1,17 @@
+[
+{"key":"clientVersion","value":"当前版本"},
+{"key":"serverVersion","value":"最新版本"},
+{"key":"update","value":"更新软件"},
+{"key":"edition","value":"版本类型"},
+{"key":"expiration","value":"有效日期"},
+{"key":"info","value":"设备信息"},
+{"key":"history","value":"更新记录"},
+{"key":"help","value":"帮助文档"},
+{"key":"agreement","value":"用户协议"},
+{"key":"privacy","value":"隐私政策"},
+{"key":"feedback","value":"问题反馈"},
+{"key":"blog","value":"官方动态"},
+{"key":"donate","value":"捐赠支持"},
+
+{"key":"title","value":"关于软件"}
+]
