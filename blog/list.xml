@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<list>
+    <article>
+        <title>关于默认广告拦截订阅规则的调整</title>
+        <time>20200703</time>
+    </article>
+    <article>
+        <title>部分文档已支持自动翻译</title>
+        <time>20200630</time>
+    </article>
+    <article>
+        <title>关于英文版本的一些说明</title>
+        <time>20200628</time>
+    </article>
+    <article>
+        <title>ajax跨域的最终实现方案</title>
+        <time>20200627</time>
+    </article>
+    <article>
+        <title>2.10.2版已发布</title>
+        <time>20200624</time>
+    </article>
+    <article>
+        <title>最近一周开发动态</title>
+        <time>20200623</time>
+    </article>
+    <article>
+        <title>2.10.1版在Google Play局部发布</title>
+        <time>20200619</time>
+    </article>
+    <article>
+        <title>举报广告功能当前存在的部分问题</title>
+        <time>20200618</time>
+    </article>
+    <article>
+        <title>近期将对地址栏布局进行调整</title>
+        <time>20200617</time>
+    </article>
+    <article>
+        <title>广告拦截新增脚本规则，扩展性进一步增强</title>
+        <time>20200616</time>
+    </article>
+    <article>
+        <title>浏览器新增举报广告功能，开始自建广告拦截库</title>
+        <time>20200615</time>
+    </article>
+    <article>
+        <title>荟萃浏览器搭建官方博客啦</title>
+        <time>20200614</time>
+    </article>
+</list>
