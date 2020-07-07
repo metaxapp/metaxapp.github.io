@@ -1,0 +1,17 @@
+[
+{"key":"clientVersion","value":"Current Version"},
+{"key":"serverVersion","value":"Latest Version"},
+{"key":"update","value":"Update"},
+{"key":"edition","value":"Edition"},
+{"key":"expiration","value":"Expiration"},
+{"key":"info","value":"Device Information"},
+{"key":"history","value":"Update Record"},
+{"key":"help","value":"Help"},
+{"key":"agreement","value":"Agreement"},
+{"key":"privacy","value":"Privacy"},
+{"key":"feedback","value":"Feedback"},
+{"key":"blog","value":"Blog"},
+{"key":"donate","value":"Donate"},
+
+{"key":"title","value":"About"}
+]
