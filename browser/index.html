@@ -1,0 +1,289 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<base href="http://uujian.cn/browser/index/">
+
+    <title>荟萃浏览器 - 畅享极致上网体验</title>
+
+    <style>
+        *{padding:0;margin:0;text-decoration-color: red;}
+        .header {
+            background-color: white;
+            top: 0;
+            width: 100%;
+            height: 46px;
+            position: fixed;
+            z-index: 1;
+            box-shadow: 0 0 3px #c0c0c0;
+        }
+        .header-title{
+            font-size:16px;
+            color:#404040;
+            margin:0 46px;
+            height:46px;
+            line-height:46px;
+        }
+        .header-icon{
+            padding:0 13px;
+            width:20px;
+            height:20px;
+            margin-top:-10px;
+            top:50%;
+            position:absolute;
+        }
+
+        .content{
+            width: 100%;
+            margin-top: 46px;
+            position:absolute;
+            top: 0;
+            bottom: 0;
+        }
+
+        .section{
+            text-align: center;
+            width: 100%;
+            height:100%;
+            position:relative;
+        }
+        .section-container{
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .section-image{
+            padding:4px;
+            height:50vh;
+            width:auto;
+            margin:10px auto;
+            display:inline-block;
+        }
+		/*
+        .section-image{
+            padding:4px;
+            height:34vh;
+            width:auto;
+            margin:10px auto;
+            display:inline-block;
+        }
+		*/
+        .section-brief{line-height:46px;font-size: 20px;color:#404040;padding:0 13px;}
+        .section-desc{font-size: 16px;color:#404040;padding:0 13px;}
+        .section-next{
+            padding:4px;
+            height:20px;
+            width:20px;
+            margin:0 auto;
+            display:block;
+            border-radius: 14px;
+            box-shadow: 0 0 3px #c0c0c0;
+        }
+        .section-icon{
+            padding:4px;
+            height:20px;
+            width:20px;
+            margin:0 auto;
+            display:block;
+            border-radius: 14px;
+        }
+        .download-url{
+            text-decoration: none;
+        }
+
+        .footer-link{display:inline-block;padding:0 5px;color:#808080;font-size: 12px;text-decoration: none;}
+
+        .drawer-header{top: 0;width: 100%;height: 46px;position: relative;}
+        .drawer-icon{padding:0 13px;width:20px;height:20px;margin-top:-10px;top:50%;position:absolute;}
+        .drawer-title{font-size:16px;color:#404040;height:46px;line-height:46px;display:block;margin-left:46px;}
+        .drawer-item{font-size:16px;color:#404040;;padding:0 13px;height:46px;line-height:46px;display:block;text-decoration: none;}
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <img id="menu" class="header-icon" src="icon/option.png">
+    <span id="title" class="header-title">荟萃浏览器</span>
+</header>
+
+<div class="content">
+
+    <div class="section">
+        <div class="section-container">
+            <img style="height:48px;width:48px;margin:0 auto;display:block;" src="icon/browser.png"/>
+            <div>
+                <p class="section-brief">臻于完美的新时代浏览器</p>
+                <p class="section-desc">通过在设计上的精益求精，荟萃浏览器现在更小巧、更快速、更安全、更强大。</p>
+            </div>
+            <img class="section-image" style="height:34vh;" src="image/home.png"/>
+            <div>
+                <a class="download-url" style="line-height:34px;height:34px;padding:0 5px;font-size: 16px;color:#fff;background-color:#00a2e8;border-radius: 3px;display:inline-block;">下载测试版（3.8MB）</a>
+                <p style="line-height:46px;font-size: 15px;color:#404040;">版本:2.9.11 时间:2020-6-11</p>
+            </div>
+            <img class="section-next" onclick="scrollDown('speed');" src="icon/next.png"/>
+        </div>
+    </div>
+    <div id="speed" class="section">
+        <div class="section-container">
+            <img class="section-icon" style="background-color: #ffd700;" src="icon/speed.png"/>
+            <p class="section-brief">畅享更快速、更极致的上网体验</p>
+            <p class="section-desc">荟萃浏览器始终以改善用户体验为核心理念，保持体积小巧、界面简洁，不断优化加载速度、改进上网体验，充分满足用户的个性化需求。</p>
+            <div>
+                <img class="section-image" src="image/speed.png"/>
+                <!--<img class="section-image" src="image/tool.png"/>-->
+            </div>
+            <img class="section-next" onclick="scrollDown('media');" src="icon/next.png"/>
+        </div>
+    </div>
+    <div id="media" class="section">
+
+        <div class="section-container">
+            <img class="section-icon" style="background-color: #ff0000;" src="icon/media.png"/>
+            <p class="section-brief">完善的阅读、视频等多媒体支持</p>
+            <p class="section-desc">通过集成小说转码阅读、视频边下边播、资源嗅探缓存等多媒体功能，在荟萃浏览器上即可满足您的娱乐需求，无需再安装其他繁杂的应用。</p>
+            <div>
+                <!--<img class="section-image" style="height:180px;" src="image/reader.png"/>-->
+                <img class="section-image" style="height:auto;width:45vh;" src="image/video.png"/>
+            </div>
+            <img class="section-next" onclick="scrollDown('tool');" src="icon/next.png"/>
+        </div>
+    </div>
+    <div id="tool" class="section">
+        <div class="section-container">
+            <img class="section-icon" style="background-color: #00a2e8;" src="icon/search.png"/>
+            <p class="section-brief">丰富且强大的内置工具和插件扩展</p>
+            <p class="section-desc">荟萃浏览器内置了谷歌网页翻译、网页语音朗读、查看网页源码/网络日志等工具，并支持安装第三方插件，从而对已有功能进行改进，或扩展更多新功能。</p>
+            <div>
+                <!--<img class="section-image" src="image/more.png"/>-->
+                <img class="section-image" src="image/webapp.png"/>
+            </div>
+            <img class="section-next" onclick="scrollDown('safe');" src="icon/next.png"/>
+        </div>
+    </div>
+    <div id="safe" class="section">
+        <div class="section-container">
+            <img class="section-icon" style="background-color: #65c541;" src="icon/protect.png"/>
+            <p class="section-brief">让您上网更加省心、放心</p>
+            <p class="section-desc">针对移动端网页上各种影响浏览的广告和限制，荟萃浏览器内置了强力的Adblock Plus广告拦截模块，并可通过第三方插件来改善部分网站的体验。</p>
+            <div>
+                <!--<img class="section-image" src="image/adblock.png"/>-->
+                <img class="section-image" src="image/intercepted.png"/>
+            </div>
+            <img class="section-next" onclick="scrollDown('footer');" src="icon/next.png"/>
+        </div>
+    </div>
+    <footer id="footer" class="footer">
+        <div style="width:100%;padding:12px 0;background-color:#00a2e8;text-align: center;">
+            <p style="font-size: 18px;color:white;line-height: 46px;">立即开始体验荟萃浏览器</p>
+            <a class="download-url" style="font-size: 14px;color:white;padding:5px;border:1px solid white;display:inline-block;">下载荟萃浏览器</a>
+        </div>
+        <div style="width:100%;padding:12px 0;text-align: center;">
+            <div style="padding:6px 0;">
+                <a class="footer-link" href="http://uujian.cn/browser/help.html">帮助文档</a>
+                <a class="footer-link" href="http://uujian.cn/browser/history.html">更新记录</a>
+                <a class="footer-link" href="http://uujian.cn/webapp/list.html">插件扩展</a>
+                <!--<a class="footer-link" href="http://uujian.cn/bookdownloader/index.html">更多产品</a>-->
+            </div>
+            <p style="font-size: 12px;color:#808080;padding:6px 0;">荟萃浏览器 2018-2020</p>
+        </div>
+    </footer>
+</div>
+<div id="shadow" style="position:fixed;overflow:auto;width:100%;height:100%;;background-color: rgba(0,0,0,0.3);display:none;z-index: 2;"></div>
+<div id="drawer" style="position:fixed;overflow:auto;width:50%;height:100%;background-color: white;left:-50%;z-index: 2;">
+    <div class="drawer-header">
+        <img class="drawer-icon" src="icon/favicon.ico">
+        <span class="drawer-title" id="more">荟萃浏览器</span>
+    </div>
+    <a id="help" class="drawer-item" href="http://uujian.cn/browser/help.html">帮助文档</a>
+    <a id="history" class="drawer-item" href="http://uujian.cn/browser/history.html">更新记录</a>
+    <a id="webapp" class="drawer-item" href="http://uujian.cn/webapp/list.html">插件扩展</a>
+    <!--<a id="reader" class="drawer-item" href="http://uujian.cn/bookdownloader/index.html">更多产品</a>-->
+</div>
+
+<script>
+    var debug=!meta;
+    var play=false;
+    if(debug) var meta={};
+    else play=meta.queryApp("com.android.vending");
+
+    var packageName="cn.uujian.browser";
+    var playUrl="intent://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id%3D"+packageName+"#Intent;package=com.google.android.gms;scheme=https;S.browser_fallback_url=https://play.google.com/store/apps/details%3Fid%3D"+packageName+";end;";
+    var officialUrl="http://uujian.cn/browser/apk/beta.apk";
+    //绑定下载链接
+    var downloadElements=document.querySelectorAll(".download-url");
+    for(var i=0;i<downloadElements.length;i++){
+        var downloadElement=downloadElements[i];
+        downloadElement.href=play?playUrl:officialUrl;
+    }
+    //调整更新日期
+    if(debug){
+        var date=new Date().getTime();
+    }
+
+
+    var animTimer=null;
+    var menuElement=document.getElementById("menu");
+    var shadowElement=document.getElementById("shadow");
+    var drawerElement=document.getElementById("drawer");
+    menuElement.onclick = function(){
+        showDrawer(drawerElement,shadowElement);
+    };
+    shadowElement.onclick = function(){
+        hideDrawer(drawerElement,shadowElement);
+    };
+    //向下滚动
+    function scrollDown(id){
+        var element=document.getElementById(id);
+        if(animTimer!=null) clearInterval(animTimer);
+        var scrollLength=0;
+        animTimer=setInterval(function(){
+            var currentPosition = document.scrollingElement.scrollTop;
+            currentPosition += scrollLength;
+            scrollLength += 5;
+            if (currentPosition <element.offsetTop) {
+                window.scrollTo(0, currentPosition);
+            }
+            else {
+                window.scrollTo(0, element.offsetTop);
+                clearInterval(animTimer);
+            }
+        },10);
+    }
+    //显示左侧
+    function showDrawer(drawerElement,shadowElement){
+        if(animTimer!=null) clearInterval(animTimer);
+        var scrollLength=5;
+        animTimer = setInterval(function(){
+            if(drawerElement.offsetLeft >= 0){
+                shadowElement.style.display="block";
+                drawerElement.style.left=0;
+                clearInterval(animTimer);
+            }
+            else{
+                scrollLength += 5;
+                drawerElement.style.left=(drawerElement.offsetLeft+scrollLength)+"px";
+            }
+        },10);
+    }
+    //隐藏左侧
+    function hideDrawer(drawerElement,shadowElement){
+        if(animTimer!=null) clearInterval(animTimer);
+        var scrollLength=5;
+        animTimer = setInterval(function(){
+            if(drawerElement.offsetLeft <= -document.body.offsetWidth/2){
+                drawerElement.style.left = -document.body.offsetWidth/2;
+                shadowElement.style.display="none";
+                clearInterval(animTimer);
+            }
+            else{
+                scrollLength += 5;
+                drawerElement.style.left=(drawerElement.offsetLeft-scrollLength)+"px";
+            }
+        },20);
+    }
+</script>
+</body>
+</html>
