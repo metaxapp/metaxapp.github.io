@@ -1,0 +1,98 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content='max-age=0'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1,maximum-scale=10,user-scalable=1'>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body{display:none;}
+        .skiptranslate{display:none}
+    </style>
+    <script>
+        if(!cookie) var cookie={
+            put:function(key,value,t){
+                if(t==null) t=-1;
+                var oDate=new Date();
+                oDate.setDate(oDate.getDate()+t);
+                document.cookie=key+"="+value+"; expires="+oDate.toDateString();
+            },
+            get:function(key){
+                var arr1=document.cookie.split("; ");
+                for(var i=0;i<arr1.length;i++){
+                    var arr2=arr1[i].split("=");
+                    if(arr2[0]===key){
+                        return decodeURI(arr2[1]);
+                    }
+                }
+                return null;
+            },
+            remove:function(key){
+                this.put(key,"",-1);
+            }
+        };
+    </script>
+    <script>
+        function onTranslated(){
+            document.body.style.top="0px";
+            document.body.style.display="block";
+        }
+        var language=navigator.language;
+        if(language!=="zh-CN"){
+            var transLan=language.indexOf("zh-")===0?"zh-TW":"en";
+            var transvalue=cookie.get("googtrans");
+            if(transvalue==null) cookie.put("googtrans","/auto/"+transLan);
+        }
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    includedLanguages: "en,zh-CN,zh-TW",
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: true,
+                },
+                "google_translate_element"
+            );
+        }
+        function googleTranslateStart(){
+            if(language!=="zh-CN"){
+                var script=document.createElement("script");
+                script.src="https://translate.google.cn/translate_a/element.js?cb=googleTranslateElementInit";
+                script.onload=function(){
+                    setTimeout("onTranslated()",1000);
+                };
+                document.body.appendChild(script);
+            }
+			else onTranslated();
+        }
+    </script>
+    <script>
+        function getParam(variable){
+            const query = location.search.substring(1);
+            const vars = query.split("&");
+            for (let i=0; i<vars.length; i++) {
+                const pair = vars[i].split("=");
+                if(pair[0] === variable){return pair[1];}
+            }
+            return(null);
+        }
+        function showMarkdown(time){
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload=function() {
+                document.querySelector("section").innerHTML=marked(xmlhttp.responseText);
+                //加载之后再翻译
+                googleTranslateStart();
+            };
+            xmlhttp.open("GET","../md/"+time+".md",true);
+            xmlhttp.send();
+        }
+
+        const title=getParam("title");
+        const time=getParam("time");
+        document.title=decodeURIComponent(title);
+        showMarkdown(time);
+    </script>
+</head>
+<body>
+<section>
+</section>
+</body>
+</html>
