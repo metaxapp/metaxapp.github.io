@@ -1,0 +1,117 @@
+<html>
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1,maximum-scale=10,user-scalable=1'>
+    <title>更新记录</title>
+    <style>
+        *{margin:0;padding:0;}
+        ul{position:relative;padding:0;list-style:none;}
+        img{border:0;width:20px;height:20px;margin-top:-10px;top: 50%;position:absolute;}
+        li{position:relative;padding:0;list-style:none;}
+        p{overflow:hidden;text-decoration:none;display:block;padding:10px 13px;}
+        .first{color:#333333;font-size:16px;}
+        .second{color:#808080;font-size:15px;}
+        span{padding:0;margin-left:0;}
+        /*a{text-decoration:none;display:block;padding:10px 13px;}*/
+        a{text-decoration:none;font-size:15px;display:inline-block;padding:0 10px;color:#00a2e8;}
+        .link{color:#108EE9;text-align:center;}
+        #title{margin-left:25px;color:#333333;}
+        #top{position:relative;}
+    </style>
+    <style>
+        body{display:none;}
+        .skiptranslate{display:none}
+    </style>
+</head>
+<body>
+<p id='top' class='link'>
+    <span><img src='../favicon.ico'/></span>
+    <span id='title'>更新记录</span>
+</p>
+<script>
+    if(!cookie) var cookie={
+        put:function(key,value,t){
+            if(t==null) t=-1;
+            var oDate=new Date();
+            oDate.setDate(oDate.getDate()+t);
+            document.cookie=key+"="+value+"; expires="+oDate.toDateString();
+        },
+        get:function(key){
+            var arr1=document.cookie.split("; ");
+            for(var i=0;i<arr1.length;i++){
+                var arr2=arr1[i].split("=");
+                if(arr2[0]===key){
+                    return decodeURI(arr2[1]);
+                }
+            }
+            return null;
+        },
+        remove:function(key){
+            this.put(key,"",-1);
+        }
+    };
+</script>
+<script>
+    function onTranslated(){
+        console.log(document.body.style.top);
+        document.body.style.top="0";
+        document.body.style.display="block";
+    }
+    var language=navigator.language;
+    if(language!=="zh-CN"){
+        var transLan=language.indexOf("zh-")===0?"zh-TW":"en";
+        var transvalue=cookie.get("googtrans");
+        if(transvalue==null) cookie.put("googtrans","/auto/"+transLan);
+    }
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                includedLanguages: "en,zh-CN,zh-TW",
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: true,
+            },
+            "google_translate_element"
+        );
+    }
+    function googleTranslateStart(){
+        if(language!=="zh-CN"){
+            var script=document.createElement("script");
+            script.src="https://translate.google.cn/translate_a/element.js?cb=googleTranslateElementInit";
+            script.onload=function(){
+                setTimeout("onTranslated()",1000);
+            };
+            document.body.appendChild(script);
+        }
+        else document.body.style.display="block";
+    }
+</script>
+<script>
+var debug=!meta;
+if(debug) var meta={};
+//var enable=debug||!meta.queryApp("com.android.vending");
+var enable=false;
+
+var xhr=new XMLHttpRequest();
+xhr.onload=function(){
+    var array=xhr.responseText.split("\n");
+    var catalog="";
+    var content="";
+    for(var i=0;i<array.length;i++){
+        var text=array[i];
+        if(text.indexOf('API')!==-1){
+            var splits=text.split("（API");
+            var versionCode=splits[1].split(" ")[0];
+            var versionName=splits[0];
+            var fileUrl="http://uujian.cn/browser/apk/"+versionCode+"-"+versionName+".apk";
+            var href="<a href='"+fileUrl+"'>下载</a>";
+            content+="<p class='second'>"+versionName+(enable?href:"")+"</p>\n";
+        }
+        else content+="<p class='second'>"+text+"</p>\n";
+    }
+    document.body.innerHTML=document.body.innerHTML+catalog+content;
+    googleTranslateStart();
+};
+xhr.open("GET","data.txt");
+xhr.send();
+</script>
+</body>
+</html>
