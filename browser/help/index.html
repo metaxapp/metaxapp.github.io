@@ -1,0 +1,82 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content='max-age=0'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1,maximum-scale=10,user-scalable=1'>
+    <title>帮助文档</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body{display:none;}
+        .skiptranslate{display:none}
+    </style>
+    <script>
+        if(!cookie) var cookie={
+            put:function(key,value,t){
+                if(t==null) t=-1;
+                const oDate = new Date();
+                oDate.setDate(oDate.getDate()+t);
+                document.cookie=key+"="+value+"; expires="+oDate.toDateString();
+            },
+            get:function(key){
+                const arr1 = document.cookie.split("; ");
+                for(let i=0; i<arr1.length; i++){
+                    const arr2 = arr1[i].split("=");
+                    if(arr2[0]===key){
+                        return decodeURI(arr2[1]);
+                    }
+                }
+                return null;
+            },
+            remove:function(key){
+                this.put(key,"",-1);
+            }
+        };
+    </script>
+    <script>
+        function onTranslated(){
+            document.body.style.top="0px";
+            document.body.style.display="block";
+        }
+        const language = navigator.language;
+        if(language!=="zh-CN"){
+            const transLan = language.indexOf("zh-") === 0 ? "zh-TW" : "en";
+            const transvalue = cookie.get("googtrans");
+            if(transvalue==null) cookie.put("googtrans","/auto/"+transLan);
+        }
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    includedLanguages: "en,zh-CN,zh-TW",
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: true,
+                },
+                "google_translate_element"
+            );
+        }
+        function googleTranslateStart(){
+            if(language!=="zh-CN"){
+                const script = document.createElement("script");
+                script.src="https://translate.google.cn/translate_a/element.js?cb=googleTranslateElementInit";
+                script.onload=function(){
+                    setTimeout("onTranslated()",1000);
+                };
+                document.body.appendChild(script);
+            }
+            else onTranslated();
+        }
+    </script>
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.onload=function() {
+            document.querySelector("section").innerHTML=marked(xhr.responseText);
+            googleTranslateStart();
+        };
+        xhr.open("GET","data.md",true);
+        xhr.send();
+    </script>
+</head>
+<body>
+<section>
+</section>
+</body>
+</html>
